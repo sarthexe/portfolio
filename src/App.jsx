@@ -46,7 +46,7 @@ export default function Portfolio() {
     { name: "Mental Health MCP", type: "AI Agent", desc: "MCP server for mental health awareness and support chatbot", link: "https://github.com/sarthexe/mental-health-awareness-mcp" },
     { name: "Smart ATS", type: "NLP Tool", desc: "AI-powered resume screening with keyword extraction", link: "https://github.com/sarthexe/smart-ats" },
     { name: "YouTube Q&A", type: "RAG App", desc: "Ask questions about any YouTube video using RAG", link: "https://github.com/sarthexe/yt_qna" },
-    { name: "Text Summarizer", type: "Transformer", desc: "Fine-tuned T5 model for abstractive summarization", link: "https://github.com/sarthexe/text-summarizer" },
+    { name: "Text Summarizer", type: "Transformer", desc: "Pegasus model for abstractive summarization", link: "https://github.com/sarthexe/text-summarizer" },
     // Add more projects below
     { name: "Coming Soon", type: "Project", desc: "New project in development", link: "#", placeholder: true },
     { name: "Coming Soon", type: "Project", desc: "New project in development", link: "#", placeholder: true },
