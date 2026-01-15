@@ -1,16 +1,8 @@
-# ⚡ Sarthak Maurya | Portfolio
+#  Sarthak Maurya | Portfolio
 
-> **"Built for speed. Powered by Vite."**
+My personal portfolio showcasing my projects, skills, and experience. Designed to be minimal, responsive, and blazing fast.
 
-A high-performance personal portfolio showcasing my projects, skills, and experience. Designed to be minimal, responsive, and blazing fast.
-
-### 🛠️ Under the Hood
-* **Core:** Vite (Instant HMR & Optimized Build)
-* **Framework:** React / Vue (Delete as needed)
-* **Styling:** CSS / Tailwind
-* **Deployment:** Netlify / Vercel
-
-### 🚀 Get It Running
+###  Get It Running
 
 ```bash
 # 1. Clone the repository
