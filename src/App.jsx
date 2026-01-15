@@ -47,10 +47,9 @@ export default function Portfolio() {
     { name: "Smart ATS", type: "NLP Tool", desc: "AI-powered resume screening with keyword extraction", link: "https://github.com/sarthexe/smart-ats" },
     { name: "YouTube Q&A", type: "RAG App", desc: "Ask questions about any YouTube video using RAG", link: "https://github.com/sarthexe/yt_qna" },
     { name: "Text Summarizer", type: "Transformer", desc: "Pegasus model for abstractive summarization", link: "https://github.com/sarthexe/text-summarizer" },
-    // Add more projects below
-    { name: "Coming Soon", type: "Project", desc: "New project in development", link: "#", placeholder: true },
-    { name: "Coming Soon", type: "Project", desc: "New project in development", link: "#", placeholder: true },
-    { name: "Coming Soon", type: "Project", desc: "New project in development", link: "#", placeholder: true },
+    { name: "NanoGPT", type: "LLM", desc: "Minimal GPT implementation for text generation from scratch", link: "https://github.com/sarthexe/nano-gpt" },
+    { name: "Sentiment Analysis", type: "NLP", desc: "Deep learning-based sentiment classification model", link: "https://github.com/sarthexe/Sentiment-Analysis-Minor-Project" },
+    { name: "Cloud SLA Predictor", type: "ML Model", desc: "XGBoost-based SLA violation prediction for cloud services", link: "#" },
   ];
 
   const stack = [
