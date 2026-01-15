@@ -43,13 +43,14 @@ export default function Portfolio() {
   };
 
   const projects = [
+    { name: "NanoGPT", type: "LLM", desc: "Minimal GPT implementation for text generation from scratch", link: "https://github.com/sarthexe/nano-gpt" },
     { name: "Mental Health MCP", type: "AI Agent", desc: "MCP server for mental health awareness and support chatbot", link: "https://github.com/sarthexe/mental-health-awareness-mcp" },
+    { name: "Cloud SLA Predictor", type: "ML Model", desc: "XGBoost-based SLA violation prediction for cloud services", link: "#" },
+    { name: "Text Summarizer", type: "Transformer", desc: "Pegasus model for abstractive summarization", link: "https://github.com/sarthexe/text-summarizer" },
     { name: "Smart ATS", type: "NLP Tool", desc: "AI-powered resume screening with keyword extraction", link: "https://github.com/sarthexe/smart-ats" },
     { name: "YouTube Q&A", type: "RAG App", desc: "Ask questions about any YouTube video using RAG", link: "https://github.com/sarthexe/yt_qna" },
-    { name: "Text Summarizer", type: "Transformer", desc: "Pegasus model for abstractive summarization", link: "https://github.com/sarthexe/text-summarizer" },
-    { name: "NanoGPT", type: "LLM", desc: "Minimal GPT implementation for text generation from scratch", link: "https://github.com/sarthexe/nano-gpt" },
     { name: "Sentiment Analysis", type: "NLP", desc: "Deep learning-based sentiment classification model", link: "https://github.com/sarthexe/Sentiment-Analysis-Minor-Project" },
-    { name: "Cloud SLA Predictor", type: "ML Model", desc: "XGBoost-based SLA violation prediction for cloud services", link: "#" },
+
   ];
 
   const stack = [
