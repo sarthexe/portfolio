@@ -670,7 +670,7 @@ export default function Portfolio() {
                 <a href="mailto:sarthakmaurya04@gmail.com" className="cta-btn">
                   Let's Talk <IconArrow />
                 </a>
-                <a href="/public/sarthax_res.pdf" target="_blank" rel="noopener noreferrer" className="resume-btn">
+                <a href="/sarthax_res.pdf" target="_blank" rel="noopener noreferrer" className="resume-btn">
                   📄 Resume
                 </a>
               </div>
