@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import profilePic from './elephanta.jpg'
@@ -11,6 +12,51 @@ const IconGithub = () => (
 const IconLinkedin = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+=======
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Mail, ExternalLink, Code2, Terminal, Cpu, Globe,
+  User, Briefcase, Send, Menu, X, ChevronDown, Moon, Sun,
+  MessageSquare, Sparkles, Bot, Loader2, ArrowRight, Layers, Zap, Shield, Check
+} from 'lucide-react';
+
+// --- CUSTOM ICONS (Replacing deprecated Lucide brand icons) ---
+
+const Github = ({ size = 24, className = "" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </svg>
+);
+
+const Linkedin = ({ size = 24, className = "" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+>>>>>>> e96c803 (Changed the github link for mindfulspace)
   </svg>
 );
 
@@ -21,11 +67,68 @@ const IconMail = () => (
   </svg>
 );
 
+<<<<<<< HEAD
 const IconArrow = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <path d="M7 17L17 7M17 7H7M17 7V17" />
   </svg>
 );
+=======
+const apiKey = ""; // API Key injected at runtime
+
+const callGemini = async (prompt, systemInstruction = "") => {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+  const payload = {
+    contents: [{ parts: [{ text: prompt }] }],
+    systemInstruction: systemInstruction ? { parts: [{ text: systemInstruction }] } : undefined
+  };
+
+  let delay = 1000;
+  for (let i = 0; i < 5; i++) {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
+      return data.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't generate a response.";
+    } catch (e) {
+      if (i === 4) throw e;
+      await new Promise(r => setTimeout(r, delay));
+      delay *= 2;
+    }
+  }
+};
+
+const useOnScreen = (ref, rootMargin = "0px") => {
+  const [isIntersecting, setIntersecting] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIntersecting(entry.isIntersecting),
+      { rootMargin, threshold: 0.1 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, [ref, rootMargin]);
+  return isIntersecting;
+};
+
+const AnimatedSection = ({ children, className = "" }) => {
+  const ref = useRef(null);
+  const isVisible = useOnScreen(ref, "-50px");
+  return (
+    <div ref={ref} className={`reveal ${isVisible ? 'active' : ''} ${className}`}>
+      {children}
+    </div>
+  );
+};
+
+// --- MAIN COMPONENT ---
+>>>>>>> e96c803 (Changed the github link for mindfulspace)
 
 export default function Portfolio() {
   const navigate = useNavigate();
@@ -43,6 +146,7 @@ export default function Portfolio() {
   };
 
   const projects = [
+<<<<<<< HEAD
     { name: "NanoGPT", type: "LLM", desc: "Minimal GPT implementation for text generation from scratch", link: "https://github.com/sarthexe/nano-gpt" },
     { name: "Mental Health MCP", type: "AI Agent", desc: "MCP server for mental health awareness and support chatbot", link: "https://github.com/sarthexe/mental-health-awareness-mcp" },
     { name: "Cloud SLA Predictor", type: "ML Model", desc: "XGBoost-based SLA violation prediction for cloud services", link: "#" },
@@ -51,6 +155,36 @@ export default function Portfolio() {
     { name: "YouTube Q&A", type: "RAG App", desc: "Ask questions about any YouTube video using RAG", link: "https://github.com/sarthexe/yt_qna" },
     { name: "Sentiment Analysis", type: "NLP", desc: "Deep learning-based sentiment classification model", link: "https://github.com/sarthexe/Sentiment-Analysis-Minor-Project" },
 
+=======
+    {
+      title: "Mental Health MCP",
+      desc: "An AI-driven Model Context Protocol agent designed to provide context-aware mental health support and awareness.",
+      tags: ["AI Agents", "Python", "MCP"],
+      link: "https://github.com/sarthexe/mindfulspace",
+      featured: true
+    },
+    {
+      title: "Smart ATS",
+      desc: "Intelligent Applicant Tracking System using NLP to screen resumes and match them against job descriptions effectively.",
+      tags: ["NLP", "Streamlit", "Generative AI"],
+      link: "https://github.com/sarthexe/smart-ats",
+      featured: false
+    },
+    {
+      title: "YouTube Q&A",
+      desc: "RAG-based application allowing users to chat with YouTube videos, extracting insights and answers from transcript data.",
+      tags: ["RAG", "LangChain", "OpenAI"],
+      link: "https://github.com/sarthexe/yt_qna",
+      featured: false
+    },
+    {
+      title: "Text Summarizer",
+      desc: "Advanced text summarization tool leveraging transformer models to generate concise abstracts from long-form content.",
+      tags: ["Transformers", "HuggingFace", "NLP"],
+      link: "https://github.com/sarthexe/text-summarizer",
+      featured: false
+    }
+>>>>>>> e96c803 (Changed the github link for mindfulspace)
   ];
 
   const stack = [
@@ -64,6 +198,75 @@ export default function Portfolio() {
     "Docker", "Azure", "Git"
   ];
 
+<<<<<<< HEAD
+=======
+  // Handlers
+  const handleChatSubmit = async (e) => {
+    e.preventDefault();
+    if (!chatMessage.trim()) return;
+    const userMsg = chatMessage;
+    setChatMessage("");
+    setChatHistory(prev => [...prev, { role: 'user', text: userMsg }]);
+    setIsAiLoading(true);
+
+    const context = `
+      Context:
+      Name: Sarthak Maurya
+      Role: AI Engineer & Machine Learning Specialist
+      Skills: ${skills.map(s => s.name).join(', ')}.
+      Projects: ${projects.map(p => `${p.title}: ${p.desc}`).join(' | ')}.
+      Experience: ${experiences.map(e => `${e.role} at ${e.company}`).join(' | ')}.
+      Tone: Professional, concise, confident, like a senior AI engineer.
+    `;
+
+    try {
+      const aiResponse = await callGemini(userMsg, context);
+      setChatHistory(prev => [...prev, { role: 'system', text: aiResponse }]);
+    } catch (error) {
+      setChatHistory(prev => [...prev, { role: 'system', text: "Connection error." }]);
+    } finally {
+      setIsAiLoading(false);
+    }
+  };
+
+  const handleEnhanceMessage = async () => {
+    if (!contactMessage.trim()) return;
+    setIsEnhancing(true);
+    try {
+      const systemInstruction = "You are an expert business communication coach. Rewrite the user's message to be professional, concise, and persuasive. Return ONLY the rewritten text. Do not include any explanations, conversational filler, or internal thinking.";
+      const prompt = `Rewrite this message: "${contactMessage}"`;
+      const enhanced = await callGemini(prompt, systemInstruction);
+      const cleanText = enhanced.replace(/^Here is.*?:\s*/i, '').replace(/^"|"$/g, '').trim();
+      setContactMessage(cleanText);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsEnhancing(false);
+    }
+  };
+
+  const handleSendInquiry = async () => {
+    if (!contactMessage.trim()) return;
+    setIsSending(true);
+
+    const subject = encodeURIComponent("Business Inquiry from Portfolio");
+    const body = encodeURIComponent(contactMessage);
+    const mailtoLink = `mailto:sarthakmaurya04@gmail.com?subject=${subject}&body=${body}`;
+
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    window.location.href = mailtoLink;
+
+    setIsSending(false);
+    setIsSent(true);
+
+    setTimeout(() => {
+      setIsSent(false);
+      setContactMessage("");
+    }, 3000);
+  };
+
+>>>>>>> e96c803 (Changed the github link for mindfulspace)
   return (
     <>
       <style>{`
@@ -81,10 +284,49 @@ export default function Portfolio() {
           --accent-light: #fef3e8;
         }
 
+<<<<<<< HEAD
         body {
           font-family: 'Space Grotesk', sans-serif;
           background: var(--cream);
           color: var(--charcoal);
+=======
+        .theme-dark {
+          /* Refined Dark Palette */
+          --bg-body: #050505;
+          --bg-surface: #121212;
+          --bg-glass: rgba(20, 20, 20, 0.8);
+          --text-primary: #f5f5f5;
+          --text-secondary: #a3a3a3;
+          --text-tertiary: #666666;
+          --border-subtle: rgba(255, 255, 255, 0.08);
+          --border-strong: rgba(255, 255, 255, 0.15);
+          --shadow-card: 0 0 0 1px rgba(255,255,255,0.05), 0 4px 20px rgba(0,0,0,0.4); 
+          
+          --accent-primary: #6366f1;
+          --accent-glow: rgba(99, 102, 241, 0.15);
+          --gradient-text: linear-gradient(to right, #ffffff, #a5a5a5);
+          
+          /* Dark mode mouse glow (Indigo) */
+          --mouse-glow: rgba(99, 102, 241, 0.15);
+        }
+
+        /* --- RESET & BASE --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html, body {
+          width: 100%;
+          overflow-x: hidden;
+          margin: 0;
+          padding: 0;
+        }
+
+        .app-wrapper {
+          min-height: 100vh;
+          width: 100%;
+          background-color: var(--bg-body);
+          color: var(--text-primary);
+          font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+>>>>>>> e96c803 (Changed the github link for mindfulspace)
           line-height: 1.5;
           -webkit-font-smoothing: antialiased;
         }
@@ -644,6 +886,7 @@ export default function Portfolio() {
         }
       `}</style>
 
+<<<<<<< HEAD
       {/* Transition Overlay - Barcelona themed curtain */}
       <div className="transition-overlay">
         <div className={`transition-curtain ${isTransitioning ? 'active' : ''}`}>
@@ -769,6 +1012,253 @@ export default function Portfolio() {
               </a>
             </div>
           </div>
+=======
+      {/* Background Effects */}
+      <div className="interactive-bg" />
+      <div className="noise-overlay" />
+      <div className="grid-pattern" />
+
+      {/* Navbar */}
+      <nav className="nav">
+        <div className="container flex-between" style={{ width: '100%' }}>
+          <div className="nav-logo" onClick={() => scrollToSection('home')} style={{ cursor: 'pointer' }}>
+            Sarthak Maurya
+          </div>
+
+          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }} className="hidden md:flex">
+            {['Home', 'Work', 'Experience', 'Contact'].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item.toLowerCase())}
+                className={`nav-link ${activeSection === item.toLowerCase() ? 'active' : ''}`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <button onClick={() => setDarkMode(!darkMode)} style={{ background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}>
+              {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <a href="https://linkedin.com/in/sarthax11" target="_blank" rel="noreferrer" style={{ color: 'var(--text-primary)' }}>
+              <Linkedin size={18} />
+            </a>
+            <a href="https://github.com/sarthexe" target="_blank" rel="noreferrer" style={{ color: 'var(--text-primary)' }}>
+              <Github size={18} />
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section id="home" className="hero">
+        <div className="container">
+          <AnimatedSection>
+            {/* Badge removed as requested */}
+
+            <h1 className="text-gradient">
+              Designing AI systems for <br />
+              <span style={{ color: 'var(--text-secondary)' }}>{displayedText}</span>
+            </h1>
+
+            <p>
+              I build accessible, pixel-perfect, performant web applications using modern architecture and advanced machine learning.
+            </p>
+
+            <div className="flex-center" style={{ gap: '16px' }}>
+              <button onClick={() => scrollToSection('work')} className="btn btn-primary">
+                View Projects <ArrowRight size={16} />
+              </button>
+              <button onClick={() => scrollToSection('contact')} className="btn btn-secondary">
+                Contact Me
+              </button>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Skills (Bento Grid) */}
+      <section id="about" style={{ padding: '100px 0' }}>
+        <div className="container">
+          <AnimatedSection>
+            <h2 style={{ marginBottom: '40px', fontSize: '2rem' }}>Technical Arsenal</h2>
+            <div className="grid-bento">
+              {skills.map((skill, i) => (
+                <div key={i} className="card">
+                  <div className="card-icon">{skill.icon}</div>
+                  <h3>{skill.name}</h3>
+                  <p className="text-sm">{skill.desc}</p>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="work" style={{ padding: '100px 0', background: 'var(--bg-surface)' }}>
+        <div className="container">
+          <div className="flex-between" style={{ marginBottom: '60px' }}>
+            <div>
+              <h2 style={{ fontSize: '2rem', marginBottom: '12px' }}>Selected Work</h2>
+              <p className="text-sm" style={{ maxWidth: '400px' }}>
+                A collection of AI and ML products built for impact.
+              </p>
+            </div>
+            <button className="btn btn-secondary hidden sm:flex" onClick={() => window.open("https://github.com/sarthexe", "_blank")}>
+              View GitHub <ExternalLink size={14} />
+            </button>
+          </div>
+
+          <div className="grid-bento">
+            {projects.map((project, i) => (
+              <AnimatedSection key={i} className={project.featured ? 'featured-project' : ''}>
+                <div
+                  className="card"
+                  style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', cursor: 'pointer' }}
+                  onClick={() => window.open(project.link, "_blank")}
+                >
+                  <div>
+                    <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+                      <div style={{ padding: '12px', background: 'var(--bg-body)', borderRadius: '12px', display: 'inline-block' }}>
+                        <Code2 size={24} />
+                      </div>
+                      {project.featured && <span className="badge" style={{ margin: 0 }}>Featured</span>}
+                    </div>
+                    <h3 style={{ fontSize: '1.5rem', marginBottom: '12px' }}>{project.title}</h3>
+                    <p className="text-sm" style={{ marginBottom: '24px', lineHeight: 1.6 }}>{project.desc}</p>
+                  </div>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                    {project.tags.map(tag => (
+                      <span key={tag} className="mono" style={{ fontSize: '0.75rem', padding: '4px 8px', background: 'var(--border-subtle)', borderRadius: '4px', color: 'var(--text-secondary)' }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Experience */}
+      <section id="experience" style={{ padding: '100px 0' }}>
+        <div className="container" style={{ maxWidth: '800px' }}>
+          <h2 style={{ marginBottom: '60px', fontSize: '2rem' }}>Experience</h2>
+          <div>
+            {experiences.map((exp, i) => (
+              <AnimatedSection key={i} className="timeline-item">
+                <div className="timeline-year">{exp.year}</div>
+                <div>
+                  <div className="timeline-role">{exp.role}</div>
+                  <div className="timeline-company">{exp.company}</div>
+                  <p className="text-sm" style={{ lineHeight: 1.6 }}>{exp.desc}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" style={{ padding: '100px 0', background: 'var(--bg-surface)' }}>
+        <div className="container" style={{ maxWidth: '600px', textAlign: 'center' }}>
+          <AnimatedSection>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '24px' }}>Let's Connect</h2>
+            <p className="text-sm" style={{ marginBottom: '40px' }}>
+              I'm currently accepting new contracts. Let's discuss how we can improve your product stack.
+            </p>
+
+            <div className="card" style={{ textAlign: 'left' }}>
+              <div style={{ marginBottom: '16px' }}>
+                <label className="text-sm" style={{ fontWeight: 600, marginBottom: '8px', display: 'block' }}>Your Message</label>
+                <textarea
+                  className="mono"
+                  rows="4"
+                  style={{ width: '100%', padding: '12px', background: 'var(--bg-body)', border: '1px solid var(--border-strong)', borderRadius: '8px', color: 'var(--text-primary)', resize: 'none' }}
+                  placeholder="Tell me about the project..."
+                  value={contactMessage}
+                  onChange={(e) => setContactMessage(e.target.value)}
+                ></textarea>
+              </div>
+
+              <div className="flex-between">
+                <button
+                  onClick={handleEnhanceMessage}
+                  className="btn btn-secondary"
+                  style={{ fontSize: '0.8rem', padding: '8px 12px' }}
+                  disabled={isEnhancing || isSent || isSending}
+                >
+                  {isEnhancing ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
+                  {isEnhancing ? 'Polishing...' : 'AI Polish'}
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={handleSendInquiry}
+                  disabled={isSending || isSent || !contactMessage.trim()}
+                  style={{ minWidth: '120px', justifyContent: 'center' }}
+                >
+                  {isSending ? (
+                    <Loader2 size={16} className="animate-spin" />
+                  ) : isSent ? (
+                    <Check size={16} />
+                  ) : (
+                    <Send size={16} />
+                  )}
+                  <span style={{ marginLeft: '8px' }}>
+                    {isSending ? 'Sending...' : isSent ? 'Sent!' : 'Send Inquiry'}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Chat Widget */}
+      <div className="chat-widget">
+        {isChatOpen && (
+          <div className="chat-window">
+            <div className="chat-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', fontWeight: 600 }}>
+                <Bot size={18} /> Assistant
+              </div>
+              <button onClick={() => setIsChatOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+                <X size={18} />
+              </button>
+            </div>
+            <div className="chat-content">
+              {chatHistory.map((msg, i) => (
+                <div key={i} className={`msg ${msg.role === 'user' ? 'msg-user' : 'msg-ai'}`}>
+                  {msg.text}
+                </div>
+              ))}
+              {isAiLoading && <div className="msg msg-ai"><Loader2 size={16} className="animate-spin" /></div>}
+            </div>
+            <form className="chat-input-wrapper" onSubmit={handleChatSubmit}>
+              <input
+                className="chat-input"
+                placeholder="Ask about my skills..."
+                value={chatMessage}
+                onChange={(e) => setChatMessage(e.target.value)}
+              />
+              <button type="submit" className="btn btn-primary" style={{ padding: '8px', borderRadius: '8px' }} disabled={isAiLoading}>
+                <Send size={16} />
+              </button>
+            </form>
+          </div>
+        )}
+        <button className="fab" onClick={() => setIsChatOpen(!isChatOpen)}>
+          {isChatOpen ? <X size={24} /> : <MessageSquare size={24} />}
+        </button>
+      </div>
+
+      <footer style={{ padding: '40px 0', textAlign: 'center', borderTop: '1px solid var(--border-subtle)' }}>
+        <div className="container text-sm">
+          © 2025 Sarthak Maurya.
+>>>>>>> e96c803 (Changed the github link for mindfulspace)
         </div>
       </div>
     </>
