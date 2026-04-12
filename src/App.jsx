@@ -51,11 +51,11 @@ export default function Portfolio() {
 
   const stack = [
     // AI/ML
-    "Python", "PyTorch", "TensorFlow", "LangChain", "OpenAI", "HuggingFace", "RAG", "Transformers",
-    // Full Stack
-    "React", "Next.js", "Node.js", "FastAPI", "TypeScript",
+    "Python", "PyTorch", "LangChain", "OpenAI", "HuggingFace", "RAG", "Transformers", "Deepgram", "ElevenLabs", "Groq", "MCP",
+    // Full Stack & Backend
+    "FastAPI", "WebSockets",
     // Databases
-    "PostgreSQL", "MongoDB", "Redis", "Pinecone",
+    "PostgreSQL", "pgvector",
     // DevOps
     "Docker", "Azure", "Git"
   ];
@@ -729,6 +729,12 @@ export default function Portfolio() {
           {/* Experience */}
           <div className="card experience-card">
             <div className="section-label">Experience</div>
+            <div className="exp-item">
+              <div className="exp-role">AI Engineer — Generative AI (Contract)</div>
+              <div className="exp-company">Airtym (Loose Inc)</div>
+              <div className="exp-desc">Built real-time AI voice pipeline with Deepgram STT, Groq LLM, and ElevenLabs TTS. Designed AI expert personas and prompt architectures for virtual consultation workflows.</div>
+              <div className="exp-date">Feb 2026 — Present</div>
+            </div>
             <div className="exp-item">
               <div className="exp-role">AI Intern</div>
               <div className="exp-company">Neolytix</div>
