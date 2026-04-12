@@ -146,45 +146,10 @@ export default function Portfolio() {
   };
 
   const projects = [
-<<<<<<< HEAD
-    { name: "NanoGPT", type: "LLM", desc: "Minimal GPT implementation for text generation from scratch", link: "https://github.com/sarthexe/nano-gpt" },
-    { name: "Mental Health MCP", type: "AI Agent", desc: "MCP server for mental health awareness and support chatbot", link: "https://github.com/sarthexe/mental-health-awareness-mcp" },
-    { name: "Cloud SLA Predictor", type: "ML Model", desc: "XGBoost-based SLA violation prediction for cloud services", link: "#" },
-    { name: "Text Summarizer", type: "Transformer", desc: "Pegasus model for abstractive summarization", link: "https://github.com/sarthexe/text-summarizer" },
-    { name: "Smart ATS", type: "NLP Tool", desc: "AI-powered resume screening with keyword extraction", link: "https://github.com/sarthexe/smart-ats" },
-    { name: "YouTube Q&A", type: "RAG App", desc: "Ask questions about any YouTube video using RAG", link: "https://github.com/sarthexe/yt_qna" },
-    { name: "Sentiment Analysis", type: "NLP", desc: "Deep learning-based sentiment classification model", link: "https://github.com/sarthexe/Sentiment-Analysis-Minor-Project" },
-
-=======
-    {
-      title: "Mental Health MCP",
-      desc: "An AI-driven Model Context Protocol agent designed to provide context-aware mental health support and awareness.",
-      tags: ["AI Agents", "Python", "MCP"],
-      link: "https://github.com/sarthexe/mindfulspace",
-      featured: true
-    },
-    {
-      title: "Smart ATS",
-      desc: "Intelligent Applicant Tracking System using NLP to screen resumes and match them against job descriptions effectively.",
-      tags: ["NLP", "Streamlit", "Generative AI"],
-      link: "https://github.com/sarthexe/smart-ats",
-      featured: false
-    },
-    {
-      title: "YouTube Q&A",
-      desc: "RAG-based application allowing users to chat with YouTube videos, extracting insights and answers from transcript data.",
-      tags: ["RAG", "LangChain", "OpenAI"],
-      link: "https://github.com/sarthexe/yt_qna",
-      featured: false
-    },
-    {
-      title: "Text Summarizer",
-      desc: "Advanced text summarization tool leveraging transformer models to generate concise abstracts from long-form content.",
-      tags: ["Transformers", "HuggingFace", "NLP"],
-      link: "https://github.com/sarthexe/text-summarizer",
-      featured: false
-    }
->>>>>>> e96c803 (Changed the github link for mindfulspace)
+    { name: "axe", type: "AI AGENT", desc: "Autonomous CLI coding agent with tiered model routing (GPT-4o-mini → GPT-4o → o1) and automatic escalation", link: "https://github.com/sarthexe/Axe_cli_agent" },
+    { name: "Mindfulspace", type: "MCP SERVER", desc: "Privacy-first mental health MCP server with on-device PII storage and real-time crisis detection", link: "https://github.com/sarthexe/mindfulspace" },
+    { name: "NeoSutra", type: "RAG SYSTEM", desc: "Clinical SOP assistant with three-layer RAG architecture on FastAPI + PostgreSQL/pgvector", link: "#" },
+    { name: "Smart ATS", type: "NLP TOOL", desc: "AI-powered resume scorer using OpenAI and LangChain for job description matching", link: "https://github.com/sarthexe/smart-ats" }
   ];
 
   const stack = [
@@ -945,10 +910,7 @@ export default function Portfolio() {
           <div className="card about-card">
             <div className="section-label">About</div>
             <p className="about-text">
-              I architect production-ready AI systems from LLM-powered agents to
-              scalable ML pipelines. Currently building intelligent healthcare
-              solutions at Neolytix, crafting RAG systems and AI agents that
-              solve real-world problems.
+              I build production-ready AI systems — real-time voice pipelines, autonomous agents, and RAG systems. Currently working on AI voice consultation at Airtym. Previously built clinical RAG assistants and fraud detection at Neolytix.
             </p>
           </div>
 
