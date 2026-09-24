@@ -1,29 +1,446 @@
-/* Global Reset & Base */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,500&display=swap");
+
+:root {
+  --bg: #090909;
+  --text: #f2f0ea;
+  --muted: #8d8982;
+  --accent: #ff453a;
+  --accent-hover: #ff6b63;
+  --border: #292929;
+  --glass: rgba(9, 9, 9, 0.72);
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --bg: #f5e6cc;
+  --text: #1c1612;
+  --muted: #6f5e50;
+  --accent: #a33b2b;
+  --accent-hover: #8f3226;
+  --border: #e0d0b4;
+  --glass: rgba(245, 230, 204, 0.82);
+  color-scheme: light;
+}
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  overflow-x: clip;
 }
 
 html {
+  background: var(--bg);
   scroll-behavior: smooth;
 }
 
+::view-transition-old(root) {
+  animation: none;
+}
+
+::view-transition-new(root) {
+  animation: theme-in 0.28s ease-out;
+}
+
+@keyframes theme-in {
+  from {
+    clip-path: circle(0px at var(--theme-x, calc(100% - 36px)) var(--theme-y, 28px));
+  }
+  to {
+    clip-path: circle(150vmax at var(--theme-x, calc(100% - 36px)) var(--theme-y, 28px));
+  }
+}
+
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #0a0a0a;
-  color: #fafafa;
-  line-height: 1.6;
+  margin: 0;
+  padding: 30vh 20px calc(20vh + env(safe-area-inset-bottom, 0px));
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Roboto Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  background: var(--accent);
+  color: var(--bg);
 }
 
-a {
-  color: inherit;
+.aurora {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34vh;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 120%, color-mix(in srgb, var(--accent) 50%, transparent), transparent 58%),
+    radial-gradient(ellipse 50% 50% at 18% 100%, color-mix(in srgb, var(--accent-hover) 22%, transparent), transparent 70%),
+    radial-gradient(ellipse 46% 48% at 82% 100%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 68%);
+}
+
+html[data-theme="light"] .aurora {
+  opacity: 0.55;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 18px;
+  z-index: 5;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.85em;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 36px 34px;
+  text-transform: lowercase;
+}
+
+main::before {
+  content: "";
+  position: absolute;
+  inset: -28px -40px;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(1.1);
+  mask-image:
+    linear-gradient(to right, transparent, #000 12%, #000 88%, transparent),
+    linear-gradient(transparent, #000 6%, #000 94%, transparent);
+  mask-composite: intersect;
+}
+
+main .raw {
+  text-transform: none;
+}
+
+h1,
+h2 {
+  font-weight: 400;
+  color: var(--accent);
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.3em;
+  line-height: 1.7;
+}
+
+h2 {
+  margin: 40px 0 8px;
+  font-size: 1em;
+}
+
+a,
+.linkish,
+.co {
+  color: var(--accent);
+}
+
+a,
+.linkish {
   text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+  transition: 0.2s;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  border-bottom: 1px solid var(--accent-hover);
+}
+
+ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+li {
+  margin: 10px 0;
+}
+
+li::marker {
+  color: var(--muted);
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 4px;
+}
+
+.look {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.look .prompt {
+  border-bottom: 1px dotted var(--accent);
+  transition: opacity 0.28s ease, transform 0.4s ease;
+}
+
+.look img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 162px;
+  height: 204px;
+  object-fit: cover;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-180deg) scale(0.86);
+  transform-origin: center;
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    transform 0.65s cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+.look.open .prompt {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.look.open img {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
+.resume-line {
+  margin: 10px 0 0;
+}
+
+details.job {
+  margin: 10px 0;
+}
+
+details.job summary {
+  cursor: pointer;
+  user-select: none;
+  color: var(--accent);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 7px 10px;
+  list-style: none;
+  transition: background-color 0.15s;
+}
+
+details.job summary::-webkit-details-marker {
+  display: none;
+}
+
+details.job summary::before {
+  content: "[+]";
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+details.job[open] summary::before {
+  content: "[-]";
+}
+
+details.job summary:hover {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+details.job summary .co {
+  flex-shrink: 0;
+}
+
+.dim {
+  color: var(--muted);
+}
+
+.metric {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+details.job ul {
+  margin: 10px 0 0;
+}
+
+.tech {
+  margin: 8px 0 4px 22px;
+  font-size: 0.9em;
+  color: var(--text);
+}
+
+.json-btn {
+  position: relative;
+  margin-left: auto;
+  color: var(--muted);
+  padding: 0 6px;
+  font-size: 0.85em;
+  white-space: nowrap;
+  transition: 0.15s;
+}
+
+.json-btn:hover,
+.json-btn.open {
+  color: var(--bg);
+  background: var(--accent);
+}
+
+.pop {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 1.8em;
+  z-index: 5;
+  width: min(600px, 86vw);
+  max-height: 55vh;
+  overflow: auto;
+  margin: 0;
+  padding: 12px;
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg));
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-size: 0.9em;
+  line-height: 1.45;
+  white-space: pre;
+  text-align: left;
+}
+
+@media (hover: hover) {
+  .json-btn:hover .pop {
+    display: block;
+  }
+}
+
+.json-btn.open .pop,
+.json-btn:focus-within .pop {
+  display: block;
+}
+
+.codeblock {
+  background: color-mix(in srgb, var(--border) 65%, var(--bg));
+  margin-top: 8px;
+  border: 1px solid var(--border);
+}
+
+.codeblock-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 10px;
+  color: var(--muted);
+}
+
+.codeblock pre {
+  margin: 0;
+  padding: 10px;
+  overflow-x: auto;
+  color: var(--text);
+}
+
+.copy {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0 6px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.copy:hover,
+.json-btn:hover {
+  color: var(--bg);
+  background: var(--accent);
+}
+
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 18vh 8px calc(20vh + env(safe-area-inset-bottom, 0px));
+    font-size: 14px;
+  }
+
+  main {
+    padding: 18px 10px;
+  }
+
+  ul {
+    padding-left: 16px;
+  }
+
+  details.job summary {
+    padding: 7px 4px;
+    flex-wrap: wrap;
+  }
+
+  details.job summary .dim {
+    flex-basis: 100%;
+    order: 5;
+    padding-left: calc(3ch + 10px);
+  }
+
+  .look img {
+    width: 126px;
+    height: 162px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+
+  body,
+  .aurora,
+  .look .prompt,
+  .look img,
+  a,
+  .json-btn,
+  .copy,
+  details.job summary {
+    transition: none;
+  }
 }
