@@ -10,10 +10,9 @@ export const portfolio = {
     socials: {
       github: "https://github.com/sarthexe",
       x: "https://x.com/s4rth4x",
-      hackernews: "",
       huggingface: "https://huggingface.co/sarthax",
       linkedin: "https://linkedin.com/in/sarthax11",
-      discord: "",
+      medium: "https://medium.com/@sarthakmaurya04",
     },
   },
   about: [
@@ -135,6 +134,13 @@ export const portfolio = {
         "Resume scorer using OpenAI and LangChain: match score, missing keywords, and a profile summary.",
     },
   ],
+  blogs: [
+    {
+      name: "DeBERTa: Understanding How Microsoft Made BERT Better",
+      href: "https://medium.com/@sarthakmaurya04/deberta-understanding-how-microsoft-made-bert-better-f75a7a9f2495",
+      about: "A look at how Microsoft improved BERT.",
+    },
+  ],
   off_the_clock: [
     "Learning Japanese. 日本語を勉強しています. The particles are currently winning.",
     "Weekend football. The weekdays are just recovery.",
@@ -153,8 +159,7 @@ export const portfolio = {
 export const socialOrder = [
   "github",
   "x",
-  "hackernews",
   "huggingface",
   "linkedin",
-  "discord",
+  "medium",
 ];

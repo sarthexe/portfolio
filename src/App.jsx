@@ -182,6 +182,17 @@ export default function Portfolio() {
           ))}
         </ul>
 
+        <h2>blogs:</h2>
+        <ul>
+          {portfolio.blogs.map((post) => (
+            <li key={post.href}>
+              <External href={post.href}>{post.name}</External>
+              {" — "}
+              {post.about}
+            </li>
+          ))}
+        </ul>
+
         <h2 id="off-the-clock">some things off the clock:</h2>
         <ul>
           {portfolio.off_the_clock.map((line) => (
