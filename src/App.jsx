@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
+import { Link, useLocation } from "react-router-dom";
+import ThemeToggle from "./components/ThemeToggle.jsx";
+import { useTheme } from "./hooks/useTheme.js";
 import { portfolio, socialOrder } from "./data.js";
 
 const metric = /(?<![A-Za-z0-9.])(\d{1,3}(?:,\d{3})*(?:\.\d+)?(?:-minute)?(?:%|\+|s)?)/g;
@@ -34,29 +36,18 @@ function External({ href, children }) {
 export default function Portfolio() {
   const [copied, setCopied] = useState(false);
   const [showPhoto, setShowPhoto] = useState(false);
-  const [photoMissing, setPhotoMissing] = useState(false);
-  const [theme, setTheme] = useState(
-    () => document.documentElement.dataset.theme || "dark",
-  );
+  const [missingSrc, setMissingSrc] = useState(null);
+  const [theme, setTheme] = useTheme();
   const [origin] = useState(() => window.location.origin);
+  const { hash } = useLocation();
   const photoSrc = theme === "light" ? "/profile_pic2.jpg" : "/profile_pic.jpg";
+  const photoMissing = missingSrc === photoSrc;
 
   useEffect(() => {
-    setPhotoMissing(false);
-  }, [photoSrc]);
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem("theme", theme);
-    document.querySelector('meta[name="theme-color"]')
-      ?.setAttribute("content", theme === "light" ? "#f5e6cc" : "#090909");
-  }, [theme]);
-
-  useEffect(() => {
-    const target = window.location.hash.slice(1);
+    const target = hash.slice(1);
     if (!target) return;
     document.getElementById(target)?.scrollIntoView();
-  }, []);
+  }, [hash]);
 
   const curl = `curl ${origin}/portfolio.json`;
 
@@ -73,28 +64,7 @@ export default function Portfolio() {
   return (
     <>
       <div className="aurora" aria-hidden="true" />
-      <button
-        type="button"
-        className="theme-toggle"
-        onClick={(event) => {
-          const next = theme === "light" ? "dark" : "light";
-          const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          const apply = () => {
-            document.documentElement.dataset.theme = next;
-            flushSync(() => setTheme(next));
-          };
-          if (reduce || !document.startViewTransition) {
-            apply();
-            return;
-          }
-          const rect = event.currentTarget.getBoundingClientRect();
-          document.documentElement.style.setProperty("--theme-x", `${rect.left + rect.width / 2}px`);
-          document.documentElement.style.setProperty("--theme-y", `${rect.top + rect.height / 2}px`);
-          document.startViewTransition(apply);
-        }}
-      >
-        {theme === "light" ? "dark" : "light"}
-      </button>
+      <ThemeToggle theme={theme} setTheme={setTheme} />
       <main>
         <div className="name-row">
           <h1>{portfolio.info.name}</h1>
@@ -108,7 +78,7 @@ export default function Portfolio() {
             <img
               src={photoSrc}
               alt=""
-              onError={() => setPhotoMissing(true)}
+              onError={() => setMissingSrc(photoSrc)}
             />
           </button>
         </div>
@@ -182,11 +152,15 @@ export default function Portfolio() {
           ))}
         </ul>
 
-        <h2>blogs:</h2>
+        <h2 id="blogs">blogs:</h2>
         <ul>
           {portfolio.blogs.map((post) => (
             <li key={post.href}>
-              <External href={post.href}>{post.name}</External>
+              {post.href?.startsWith("/") ? (
+                <Link to={post.href}>{post.name}</Link>
+              ) : (
+                <External href={post.href}>{post.name}</External>
+              )}
               {" — "}
               {post.about}
             </li>

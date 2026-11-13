@@ -137,7 +137,12 @@ export const portfolio = {
   blogs: [
     {
       name: "DeBERTa: Understanding How Microsoft Made BERT Better",
-      href: "https://medium.com/@sarthakmaurya04/deberta-understanding-how-microsoft-made-bert-better-f75a7a9f2495",
+      slug: "deberta-understanding-how-microsoft-made-bert-better",
+      href: "/blogs/deberta-understanding-how-microsoft-made-bert-better",
+      mediumHref:
+        "https://medium.com/@sarthakmaurya04/deberta-understanding-how-microsoft-made-bert-better-f75a7a9f2495",
+      date: "Oct 11, 2026",
+      readTime: "14 min read",
       about: "A look at how Microsoft improved BERT.",
     },
   ],
